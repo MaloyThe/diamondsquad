@@ -1,0 +1,18 @@
+AddDefaultCharset UTF-8 
+
+RewriteEngine On
+
+RewriteCond %{HTTPS} =off 
+RewriteRule (.*) https://%{HTTP_HOST}%{REQUEST_URI} [QSA,L]
+
+Options All -Indexes
+
+# Редиректы
+
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+
+RewriteRule ^(.*)$ index.php?action=$1 [L,QSA]
+
+# Ошибки
+ErrorDocument 403 /403.php
